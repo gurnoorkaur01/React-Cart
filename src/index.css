@@ -23,4 +23,6 @@ body {
   width:25px;
   margin-right:10px;
 }
-
+.action-icons:hover{
+  cursor:pointer;
+}
