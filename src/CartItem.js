@@ -10,6 +10,21 @@ class CartItem extends React.Component {
             img:''
         }
         //this.increaseQuantity=this.increaseQuantity.bind(this);
+        this.testing();
+    }
+    testing(){
+        const promise= new Promise((resolve,reject) => {
+            setTimeout(() =>  {
+                resolve('done');
+            }, 5000);
+        })
+        promise.then(() => {
+            //here iside promise setState will act as synchronous call 
+            this.setState( { qty : this.state.qty+10});
+            this.setState( { qty : this.state.qty+10});
+            this.setState( { qty : this.state.qty+10});
+            console.log('state',this.state);
+        }); 
     }
     increaseQuantity = () => {
         //this.state.qty += 1;
@@ -17,22 +32,51 @@ class CartItem extends React.Component {
 
         //setState form 1
         //this.setState({
-          //      qty: this.state.qty + 1 
-        //});
-
+          //  qty: this.state.qty + 1
+        //}  //, () => {}
+        //);
         //this.setState({
         //    title: "some new title"
 
         //});
 
+
         //setState form 2-if prevState required use this form
         this.setState( (prevState) => { 
             return{
-                qty: prevState.qty + 1
+                qty : prevState.qty + 1
             }   
         });
+        this.setState( (prevState) => { 
+            return{
+                qty : prevState.qty + 1
+            }   
+        });
+        this.setState( (prevState) => { 
+            return{
+                qty : prevState.qty + 1
+            }   
+        }, ()=>{console.log('this.state',this.state);}
+        ); 
+        console.log(this.state);
+    }
+
+    decreaseQuantity =() =>{
+        const { qty } = this.state;
+        if(qty === 0){
+            return;
+        } 
+
+        this.setState( (prevState) =>{
+            return {
+                qty : prevState.qty - 1
+            }
+
+      });
+
     }
     render() {
+        console.log('render');
     const {price,title,qty}=this.state;
     return (  
         <div className="cart-item">
@@ -58,6 +102,7 @@ class CartItem extends React.Component {
                         alt="decrease" 
                         className="action-icons" 
                         src="https://img-premium.flaticon.com/png/512/992/992683.png?token=exp=1622030791~hmac=8045f2cc616d478ab0e9254a1d938cb0"
+                        onClick={this.decreaseQuantity}
                         />
                     <img 
                         alt="delete" 
