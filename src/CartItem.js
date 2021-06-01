@@ -1,7 +1,7 @@
 import React from 'react';
 
 class CartItem extends React.Component {
-    
+  /*  
     testing(){
         const promise= new Promise((resolve,reject) => {
             setTimeout(() =>  {
@@ -65,9 +65,11 @@ class CartItem extends React.Component {
       });
 
     }
+    */
     render() {
     console.log('this.props', this.props);
     const {price, title, qty} = this.props.product;
+    const {product, onIncreaseQuantity, onDecreaseQuantity, onDeleteProduct } = this.props;
     return (  
         <div className="cart-item">
             {/*this.props.jsx*/}
@@ -84,7 +86,7 @@ class CartItem extends React.Component {
                         alt="increase" 
                         className="action-icons" 
                         src="https://img-premium.flaticon.com/png/512/992/992651.png?token=exp=1622030782~hmac=cdaf35bba19837b248113ab78cca349d"
-                        onClick={this.increaseQuantity}
+                        onClick={() => this.props.onIncreaseQuantity(this.props.product)}
                         //onClick={this.increaseQuantity.bind(this)} 
                         
 
@@ -93,13 +95,14 @@ class CartItem extends React.Component {
                         alt="decrease" 
                         className="action-icons" 
                         src="https://img-premium.flaticon.com/png/512/992/992683.png?token=exp=1622030791~hmac=8045f2cc616d478ab0e9254a1d938cb0"
-                        onClick={this.decreaseQuantity}
+                        onClick={() => onDecreaseQuantity(product)}
                         />
                     <img 
                         alt="delete" 
                         className="action-icons" 
                         src="https://image.flaticon.com/icons/png/512/3096/3096687.png"
-                        />
+                        onClick={ () => onDeleteProduct(product.id)}
+                    />
                 </div>
 
             </div>
