@@ -1,6 +1,6 @@
 import React from 'react';
 
-class CartItem extends React.Component {
+const CartItem = (props) => {
   /*  
     testing(){
         const promise= new Promise((resolve,reject) => {
@@ -66,15 +66,18 @@ class CartItem extends React.Component {
 
     }
     */
-    render() {
-    console.log('this.props', this.props);
-    const {price, title, qty} = this.props.product;
-    const {product, onIncreaseQuantity, onDecreaseQuantity, onDeleteProduct } = this.props;
+    
+    //console.log('this.props', this.props);
+    //we dnt need this keywords now
+    //const {price, title, qty} = this.props.product;
+    const {price, title, qty} = props.product;
+    //const {product, onIncreaseQuantity, onDecreaseQuantity, onDeleteProduct } = this.props;
+    const {product, onIncreaseQuantity, onDecreaseQuantity, onDeleteProduct } = props;
     return (  
         <div className="cart-item">
             {/*this.props.jsx*/}
             <div className="left-block">
-            <img style={styles.image}/>
+            <img style={styles.image} src={product.img}/>
             </div>
             <div className="right-block">
                 <div style={{fontSize:25}}>{title}</div>
@@ -86,7 +89,8 @@ class CartItem extends React.Component {
                         alt="increase" 
                         className="action-icons" 
                         src="https://img-premium.flaticon.com/png/512/992/992651.png?token=exp=1622030782~hmac=cdaf35bba19837b248113ab78cca349d"
-                        onClick={() => this.props.onIncreaseQuantity(this.props.product)}
+                        //onClick={() => this.props.onIncreaseQuantity(this.props.product)}
+                        onClick={() => onIncreaseQuantity(product)}
                         //onClick={this.increaseQuantity.bind(this)} 
                         
 
@@ -107,9 +111,7 @@ class CartItem extends React.Component {
 
             </div>
         </div>
-         );
-
-    }
+        );
 }
 const styles={
     image:{
